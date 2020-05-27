@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <!-- Bootstrap css文件 -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
+    <!-- 站点 自定义 样式 -->
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- 页面 自定义 样式 -->
+    <style>
+        *{margin: 0;padding: 0;text-decoration: none;list-style-type: none;}
+
+        img{border:none;}
+        a{border:none;text-decoration: none;color:#000;}
+        .center{
+            margin: 0 auto;
+         }
+         .center th,td{
+            text-align:center;
+         }
+
+        .fl{position: relative;margin: 0 auto;float: left;}
+        .fr{float: right;}
+        .clear{clear:both;}
+
+        .pageDiv{
+            width:310px;
+            margin:0 auto;
+        }
+.pagep{
+    line-height:2.4;
+    color:cadetblue;
+}
+#workingArea{
+	margin:0px 40px;
+	margin-top:30px;
+}
+.pagination{
+display:flex;
+}
+
+
+    </style>
+</head>
+<body>
+<!-- jQuery文件 在bootstrap.min.js 前引入 -->
+<script src="/assets/jQuery/jquery-2.1.4.min.js"></script>
+<!-- bootstrap js文件 -->
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<!-- 站点 自定义 函数库 -->
+<script src="/js/site.js"></script>
+
+<!-- 顶部导航栏 -->
+<header class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="/index" class="navbar-brand"><strong style="color: white">ZSC.Shop.com</strong></a>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/index">首页</a></li>
+        </ul>
+        <div class="navbar-right">
+            <p class="navbar-text">您好&nbsp;<span th:text="${uName}" class="uName"></span></p>
+            <ul class="nav navbar-nav">
+                <li><a  href="/userinfo/myself">个人中心</a></li>
+                <li id="log"><a href="/login">登录</a></li>
+                <li><a href="/logout">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<!--个人信息-->
+<br/>
+<br/>
+<br/>
+<div class="grzxbj">
+    <div class="selfinfo center">
+        <div class="lfnav fl">
+            <div class="ddzx">订单中心</div>
+            <div class="subddzx">
+                <ul>
+                    <li><a href="/userinfo/orderDetails" >我的订单</a></li>
+                </ul>
+            </div>
+            <div class="ddzx">个人中心</div>
+            <div class="subddzx">
+                <ul>
+                    <li><a href="/userinfo/myself" style="color:#ff6700;font-weight:bold;">我的个人中心</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="rtcont fr">
+            <div class="ddzxbt">交易订单</div>
+            <br/>
+            <br/>
+            <div class="ddxq">
+                <table class="table table-striped table-bordered table-hover  table-condensed">
+                    <tr class="center">
+                        <th>订单编号</th>
+                        <th>用户名称</th>
+                        <th>购买的商品</th>
+                        <th>数量</th>
+                        <th>总金额</th>
+                    </tr>
+                    <tr  th:each="o:${orders}" class="center">
+                        <td style="height:50px" th:text="${o.id}">订单号:170526435444865</td>
+                        <td style="height:50px"th:text="${o.users}">订单号:170526435444865</td>
+                        <td style="height:50px"th:text="${o.products}">已发货</td>
+                        <td style="height:50px"th:text="${o.onum}">￥1999.00</td>
+                        <td style="height:50px" th:text="${o.prices*o.onum}">2019/06/12</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="workingArea" >
+    <div class="pageDiv">
+        <ul class="pagination">
+            <p class="pagep">当前第:<span th:text="${pageInfo.pageNum}"></span>页&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <li class="page-item"><a class="page-link" href="/userinfo/orderDetails?page=1">«</a></li>
+            <li class="page-item">
+			<span th:if="${pageInfo.hasPreviousPage}">
+				<a class="page-link" th:href="@{'/userinfo/orderDetails?page='+${pageInfo.pageNum-1}}">‹</a>
+			</span>
+            </li>
+
+            <li class="page-item" th:each="p:${pageInfo.navigatepageNums }">
+                <a class="page-link pageN"th:href="@{'/userinfo/orderDetails?page='+${p}}"><span th:text="${p}"></span></a>
+            </li>
+
+            <li class="page-item">
+			<span th:if="${pageInfo.hasNextPage}">
+				<a class="page-link" th:href="@{'/userinfo/orderDetails?page='+${pageInfo.pageNum+1}}">›</a>
+			</span>
+            </li>
+            <li class="page-item"><a class="page-link" th:href="@{'/userinfo/orderDetails?page='+${pageInfo.pages}}">»</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- 底部注脚 -->
+<footer class="footer">
+    <p>Power @zsc J2EE平台开发与应用</p>
+</footer>
+</body>
+</html>

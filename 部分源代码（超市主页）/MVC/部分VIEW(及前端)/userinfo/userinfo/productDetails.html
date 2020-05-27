@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="order by dede58.com"/>
+    <title>商品详情</title>
+    <!-- Bootstrap css文件 -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
+    <!-- 站点 自定义 样式 -->
+    <link rel="stylesheet" href="/css/site.css">
+    <style>
+        *{margin: 0;padding: 0;text-decoration: none;list-style-type: none;font-family: Times New Roman;}
+
+        img{border:none;}
+        a{border:none;text-decoration: none;color:#000;}
+        .w{width: 1226px;margin: 0 auto;}
+        .fl{float: left;}
+        .fr{float: right;}
+        .clear{clear:both;}
+        .mt20{margin-top: 20px;}
+        .mt10{margin-top: 10px;font-size:22px;font-weight:bold;}
+        .ml20{margin-left: 20px;}
+        .mr40{margin-right: 40px;}
+        .h3{font-size: 22px;font-weight: bold;}
+        .banner_x .search .submit:hover{border-color: #ff6700;color:#ff6700;}
+    </style>
+</head>
+<body>
+<!-- jQuery文件 在bootstrap.min.js 前引入 -->
+<script src="/assets/jQuery/jquery-2.1.4.min.js"></script>
+<!-- bootstrap js文件 -->
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<!-- 站点 自定义 函数库 -->
+<script src="/js/site.js"></script>
+<!-- 顶部导航栏 -->
+<header class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="/index" class="navbar-brand"><strong style="color: white">ZSC.Shop.com</strong></a>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/index">首页</a></li>
+            <!--            <li><a  href="#">商品管理</a></li>-->
+            <!--            <li><a href="#">后台管理</a></li>-->
+        </ul>
+        <!--        <a href="#" class="btn navbar-btn btn-primary btn-sm navbar-right">联系客服</a>-->
+        <div class="navbar-right">
+            <p class="navbar-text">您好&nbsp;<span th:text="${uName}" class="uName"></span></p>
+            <ul class="nav navbar-nav">
+                <li><a  href="/userinfo/myself">个人中心</a></li>
+                <li id="log"><a href="/login">登录</a></li>
+                <li><a href="/logout">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<!-- xiangqing -->
+    <div class="xiangqing">
+        <div class="neirong w">
+            <div class="xiaomi6 fl"><span th:text="${product.name}"></span></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="jieshao mt20 w">
+        <div class="left fl"><img  width="100%"  height="100%" th:src="${product.img}"></div>
+        <div class="right fr">
+            <form th:action="@{/userinfo/productDetails}" method="post" th:object="${product}">
+                <div class="h3 ml20 mt20">
+                    <input type="hidden" name="id" th:value="*{id}">
+                    <span>商品名称：</span><span th:text="*{name}" name = "name" disabled="disabled"></span>
+                </div>
+    <!--            <div class="jianjie mr40 ml20 mt10">一天一苹果，健康生活</div>-->
+                <br/>
+                <div class="jianjie mr40 ml20 mt20">
+                    <tr>
+                        <td >数量:</td>
+                        <br/>
+                        <td class="cfs">
+                            <input class="lskdo"  type="text" name="num" th:value="${num}"/>
+                        </td>
+                    </tr>
+                </div>
+                <br/>
+                <div class="jiage ml20 mt10" ><span th:text="${errorMsg}" class="errorMsg"></span></div>
+                <div class="jiage ml20 mt10" ><span>商品价格：</span><span th:text="*{price}" name = "price" disabled="disabled"></span><span>元</span></div>
+                <div class="xiadan ml20 mt20">
+                    <input class="jrgwc"  type="submit"  value="立即购买" />
+                </div>
+            </form>
+<!--            <span th:text="${uName}" name="uName">111</span>-->
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+
+    <!-- 底部注脚 -->
+    <footer class="footer">
+        <p>Power @zsc J2EE平台开发与应用</p>
+    </footer>
+
+
+</body>
+</html>

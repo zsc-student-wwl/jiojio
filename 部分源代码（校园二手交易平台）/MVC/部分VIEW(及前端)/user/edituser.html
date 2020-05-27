@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息列表</title>
+</head>
+<body>
+    <h1 style="text-align:center">用户信息列表</h1>
+    <hr>
+
+    <!--<table align="center" width="80%" border="1">-->
+        <!--<tr>-->
+            <!--&lt;!&ndash;<th>用户ID</th>&ndash;&gt;-->
+            <!--<th>用户姓名</th>-->
+            <!--<th>用户密码</th>-->
+            <!--<th>用户phone</th>-->
+            <!--<th>操作</th>-->
+        <!--</tr>-->
+        <!--<tr th:each="u:${users}">-->
+              <!--&lt;!&ndash;<td th:text="${u.uid}">12</td>&ndash;&gt;-->
+            <!--<td th:text="${u.username}">高文森</td>-->
+            <!--<td th:text="${u.password}">123</td>-->
+            <!--<td th:text="${u.phone}">123</td>-->
+        <!--</tr>-->
+    <!--</table>-->
+
+
+     <form th:action="@{/user/edituser}"  th:object="${user}"  method="post" >
+
+            <input type="hidden"  name="uid" th:value="*{uid}" >
+             用户姓名 <input type="text" name="username" th:value="*{username}">
+             用户密码 <input type="password" name="password">
+             用户phone  <input type="text" name="phone" th:value="*{phone}">
+         <input type="submit" value="提交">
+         <input type="reset" value="重置"/>
+         <a th:href="@{'/index'}">点击返回</a>
+     </form>
+</body>
+</html>

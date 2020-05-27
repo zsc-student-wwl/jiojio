@@ -1,0 +1,23 @@
+<div class="pageDiv" th:fragment="html">
+	<ul class="pagination">
+		<p class="pagep">当前第:<span th:text="${pageInfo.pageNum}"></span>页&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<li class="page-item"><a class="page-link" href="/admins/listUsers?page=1">«</a></li>
+		<li class="page-item">
+			<span th:if="${pageInfo.hasPreviousPage}">
+				<a class="page-link" th:href="@{'/admins/listUsers?page='+${pageInfo.pageNum-1}}">‹</a>
+			</span>
+		</li>
+		<span th:each="p:${pageInfo.navigatepageNums }">
+			<li class="page-item">
+				<a class="page-link pageN"th:href="@{'/admins/listUsers?page='+${p}}"><span th:text="${p}"></span></a>
+			</li>
+		</span>
+		<li class="page-item">
+			<span th:if="${pageInfo.hasNextPage}">
+				<a class="page-link" th:href="@{'/admins/listUsers?page='+${pageInfo.pageNum+1}}">›</a>
+			</span>
+		</li>
+		<li class="page-item"><a class="page-link" th:href="@{'/admins/listUsers?page='+${pageInfo.pages}}">»</a></li>
+	</ul>
+</div>
+

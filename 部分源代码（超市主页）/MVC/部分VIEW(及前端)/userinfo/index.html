@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>超市主页</title>
+    <!-- Bootstrap css文件 -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
+    <!-- 站点 自定义 样式 -->
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- 页面 自定义 样式 -->
+    <style>
+    .fl{position: relative;margin: 0 auto;float: left;}
+        #form-login .form-group{min-height: 30px;}
+        #form-login button{margin-right: 30px;}
+        th{
+            text-align:center;
+        }
+        .pageDiv{
+            width:300px;
+            margin:0 auto;
+        }
+.pagep{
+    line-height:2.4;
+    color:cadetblue;
+}
+#workingArea{
+	margin:0px 40px;
+	margin-top:30px;
+}
+.pagination{
+display:flex;
+}
+    </style>
+</head>
+<body>
+<!-- jQuery文件 在bootstrap.min.js 前引入 -->
+<script src="/assets/jQuery/jquery-2.1.4.min.js"></script>
+<!-- bootstrap js文件 -->
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<!-- 站点 自定义 函数库 -->
+<script src="/js/site.js"></script>
+
+<!-- 页面 自定义 js -->
+<script>
+     $(function(){
+        $("#searchNameBtn").click(function(){
+            $(window).attr('location',"/index?name="+$("#searchName").val());
+         });
+     });
+</script>
+
+<!-- 顶部导航栏 -->
+<header class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="/index" class="navbar-brand"><strong style="color: white">ZSC.Shop.com</strong></a>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/index">首页</a></li>
+        </ul>
+        <div  class="navbar-form navbar-left">
+            <input type="text" id="searchName" placeholder="输入商品名称" class="form-control" >
+            <button type="mainSubmit" id="searchNameBtn"><span class="fa fa-search"></span></button>
+        </div>
+        <div class="navbar-right">
+            <p class="navbar-text">您好&nbsp;<span th:text="${uName}" class="uName"></span></p>
+            <ul class="nav navbar-nav">
+                <li><a  href="/userinfo/myself">个人中心</a></li>
+                <li id="log"><a href="/login">登录</a></li>
+                <li><a href="/logout">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<!-- 主体内容 -->
+<section class="container">
+    <br/>
+    <br/>
+
+    <div class="danpin center">
+        <div class="biaoti center">超市商品</div>
+        <div class="main center ">
+            <div  th:each="p:${products}" >
+                <ul class="mingxing fl">
+                    <li class="sub_mingxing"><a th:href="@{'/userinfo/productDetails?id='+ ${p.id}}"><img th:src="${p.img}" alt=""></a></li>
+                    <li class="pinpai"><a th:href="@{'/admins/modifyUser?id='+ ${p.id}}"><span th:text="${p.name}"></span></a></li>
+                    <li class="youhui">库存：<span th:text="${p.num}"></span></li>
+                    <li class="jiage">价格：<span th:text="${p.price}"></span></li>
+                </ul>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+    <br/>
+</section>
+<div id="workingArea" >
+<div class="pageDiv">
+    <ul class="pagination">
+        <p class="pagep">当前第:<span th:text="${pageInfo.pageNum}"></span>页&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <li class="page-item"><a class="page-link" href="/index?page=1">«</a></li>
+        <li class="page-item">
+			<span th:if="${pageInfo.hasPreviousPage}">
+				<a class="page-link" th:href="@{'/index?page='+${pageInfo.pageNum-1}}">‹</a>
+			</span>
+        </li>
+
+			<li class="page-item" th:each="p:${pageInfo.navigatepageNums }">
+				<a class="page-link pageN"th:href="@{'/index?page='+${p}}"><span th:text="${p}"></span></a>
+			</li>
+
+        <li class="page-item">
+			<span th:if="${pageInfo.hasNextPage}">
+				<a class="page-link" th:href="@{'/index?page='+${pageInfo.pageNum+1}}">›</a>
+			</span>
+        </li>
+        <li class="page-item"><a class="page-link" th:href="@{'/index?page='+${pageInfo.pages}}">»</a></li>
+    </ul>
+</div>
+</div>
+<!-- 底部注脚 -->
+<footer class="footer">
+    <p>Power @zsc J2EE平台开发与应用</p>
+</footer>
+</body>
+</html>

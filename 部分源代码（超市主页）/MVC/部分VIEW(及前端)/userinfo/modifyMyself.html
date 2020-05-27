@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息修改页面</title>
+    <!-- Bootstrap css文件 -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
+    <!-- 站点 自定义 样式 -->
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- 页面 自定义 样式 -->
+    <style>
+        #form-register .form-group{
+            margin-left:50%;
+            margin-top: 30px;
+            text-align: right;
+            transform: translate(-70%, -50%);
+        }
+        #form-register .form-group .form-control{
+            width:250px;
+        }
+        #form-register .form-group .star{
+            color:red;
+            text-align: left;
+        }
+        #form-register .form-group input{
+            margin-left: 20px;
+        }
+        #form-register button{
+            margin-right: 30px;
+        }
+        body{
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-image: url(" ");
+
+        }
+        #background1{
+            background-repeat: no-repeat;
+            background-size: 1200px;
+            background-image: url("");
+
+        }
+    </style>
+</head>
+<body>
+<!-- jQuery文件 在bootstrap.min.js 前引入 -->
+<script src="/assets/jQuery/jquery-2.1.4.min.js"></script>
+<!-- bootstrap js文件 -->
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<!-- 站点 自定义 函数库 -->
+<script src="/js/site.js"></script>
+
+<!-- 页面 自定义 js -->
+<script>
+    $(function () {
+
+    });
+</script>
+
+<!-- 顶部导航栏 -->
+<header class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid ">
+        <div class="container">
+            <a href="/index" class="navbar-brand" ><strong style="color: whitesmoke">ZSC.Shop.com</strong></a>
+        </div>
+    </div>
+</header>
+
+<!-- 主体内容 -->
+<section class="container">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div  class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><span class="fa fa-user">修改个人信息</span></div>
+                <div id="background1" class="panel-body">
+                    <form id="form-register" class="form-horizontal" action="/userinfo/modifyMyself" method="post" th:object="${user}">
+                        <span class="errorMsg" th:text="${errorMsg}"></span>
+                        <input type="hidden" name="id" th:value="*{id}">
+                        <div class="form-group form-inline">
+                            <label> 用户名：</label>
+                            <input type="text" required class="form-control" placeholder="输入用户名" name="username" th:value="*{username}"/>
+                            <label class="star">*</label>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label>密码：</label>
+                            <input type="password" required class="form-control" placeholder="输入密码" name="password" th:value="*{password}"/>
+                            <label class="star">*</label>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label>重复密码：</label>
+                            <input type="password" required class="form-control" placeholder="重复输入密码" name="repassword"/>
+                            <label class="star">*</label>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label>姓名：</label>
+                            <input type="text" class="form-control" placeholder="输入姓名" name="name" th:value="*{name}"/>
+                            <label>&nbsp;</label>
+                        </div>
+                        <div class="form-group form-inline" style="margin-left:100px">
+                            <label>性别：</label>
+                            <input type="radio"  name="sex" value="男"/>男
+                            <input type="radio"  name="sex" value="女"/>女
+                        </div>
+                        <div class="form-group"style="text-align: center">
+                            <button type="submit" class="btn btn-primary">确认</button>
+                            <button type="button" class="btn btn-danger" onclick="resetForm(this)">重置</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 底部注脚 -->
+<footer class="footer">
+    <p>Power @zsc J2EE平台开发与应用</p>
+</footer>
+</body>
+</html>

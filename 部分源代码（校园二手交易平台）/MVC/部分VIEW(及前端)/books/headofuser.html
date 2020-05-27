@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="headofadmin">
+    <ul>
+        <li><a th:href="@{'/admin/listuser'}">用户管理 </a></li>
+        <li><a th:href="@{'/admin/listbooks'}">图书管理 </a></a>
+        <li><a th:href="@{'/admin/listorders'}">订单管理 </a></a>
+        <li><a th:href="@{'/index'}">去购物 </a></a>
+        <li><form th:action="@{'/logout'}">
+    </ul>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Mvc演示</title>
+</head>
+<body>
+<span th:text="${errorMsg}" class="errorMsg"></span>
+<form method="post" action="/register">
+    username:<input type="text" name="username"/><br/>
+    password:<input type="password" name="password"/><br/>
+    phone:<input type="text" name="phone"/><br/>
+    <input type="submit" value="提交"/>
+    <input type="reset" value="重置"/>
+    <a th:href="index"}>返回</a>
+</form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息列表</title>
+</head>
+<body>
+<h1 style="text-align:center">
+    <ul>
+        <li><a href="/user/ordersadd" style="color:#ff6700;font-weight:bold;"  >我的订单</a></li>
+        <li><a href="/user/editmyuser" style="color:#ff6700;font-weight:bold;">我的个人中心</a></li>
+        <li><a href="/index" style="color:#ff6700;font-weight:bold;">去购物</a></li>
+        <li><form th:action="@{'/logout'}">
+            <input type="submit" value="退出">
+        </form></li>
+
+    </ul>
+</h1>
+<hr>
+
+
+<h1>
+    <ul style="text-align:center"    th:object="${user}">
+        <li style="color:#ff6700;font-weight:bold;">我的资料</li>
+        <li style="color:#ff6700;font-weight:bold;"><span>用户名:</span>&nbsp;&nbsp;<span th:text="*{username}"></span></li>
+        <li style="color:#ff6700;font-weight:bold;"><span>密码:</span>&nbsp;&nbsp;<span th:text="*{password}"></span></li>
+        <li  style="color:#ff6700;font-weight:bold;"><span>phone:</span>&nbsp;&nbsp;<span th:text="*{phone}"></span></li>
+        <a   th:href="@{'/user/edituser?uid='+*{uid}}">修改</a>
+    </ul>>
+</h1>
+
+
+
+
+
+
+</body>
+</html>

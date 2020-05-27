@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<H1 >当前用户：
+    <span sec:authentication="name"  style="color:#ff6700;font-weight:bold;"></span>
+</H1>
+<hr style="color:#ff6700;font-weight:bold;">
+      <form th:action="@{/user/bookssadd}" method="post" th:object="${books}">
+                <div class="h3 ml20 mt20">
+                    <input type="hidden" name="bid" th:value="*{bid}">
+                    <!--<span>商品名称：</span><span th:text="*{booksname}" name = "booksname" disabled="disabled"></span>-->
+                    <span><img th:src="*{booksurl}"></span>
+
+
+                    <!--<input  type="text" name="booksurl" th:value="${booksurl}"/>-->
+                </div>
+          <div class="jianjie mr40 ml20 mt20">
+              <span>商品名称：</span><span th:text="*{booksname}" name = "booksname" disabled="disabled"></span>
+          </div>
+                <br/>
+                <div class="jianjie mr40 ml20 mt20">
+                    <tr>
+                        <td >数量:</td>
+                        <br/>
+                        <td class="cfs">
+                            <input  type="text" name="booksnum" th:value="${booksnum}"/>
+                        </td>
+                    </tr>
+                </div>
+                <br/>
+                <div class="jiage ml20 mt10" >
+                    <span th:text="${errorMsg}" class="errorMsg"></span></div>
+                    <span>商品价格(单价)：</span>
+                    <span th:text="*{booksprice}" name = "booksprice" disabled="disabled">
+                    </span><span>元</span></div>
+
+                <div class="xiadan ml20 mt20">
+                    <input  type="submit"  value="立即购买" />
+                </div>
+            </form>
+            <form action="/index">
+                <input type="submit" value="返回">
+            </form>
+
+      <!--<div th:include="/books/footer :: copyright"></div>-->
+</body>
+</html>

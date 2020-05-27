@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        .code
+        {
+            font-family:Arial;
+            font-style:italic;
+            color:Red;
+            border:0;
+            padding:2px 3px;
+            letter-spacing:3px;
+            font-weight:bolder;
+        }
+        .unchanged
+        {
+            border:0;
+        }
+    </style>
+
+    <script language="javascript" type="text/javascript">
+
+        var code ; //在全局 定义验证码
+        function createCode()
+        {
+            code = "";
+            var codeLength = 6;//验证码的长度
+            var checkCode = document.getElementById("checkCode");
+            var selectChar = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');//所有候选组成验证码的字符，当然也可以用中文的
+
+            for(var i=0;i<codeLength;i++)
+            {
+
+
+                var charIndex = Math.floor(Math.random()*36);
+                code +=selectChar[charIndex];
+
+
+            }
+//       alert(code);
+            if(checkCode)
+            {
+                checkCode.className="code";
+                checkCode.value = code;
+            }
+
+        }
+        function validate () {
+            var inputCode = document.getElementById("input1").value;
+            if (inputCode.length <= 0) {
+                alert("请输入验证码！");
+            }
+            else if (inputCode != code) {
+                alert("验证码输入错误！");
+                createCode();//刷新验证码
+                window.location.href = 'http://127.0.0.1:6666/loginindex';
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+
+    </script>
+
+
+
+
+
+
+</head>
+<a onload="createCode()">
+
+    <div sec:authorize="isAuthenticated()"  data-th-bgcolor="red">
+        <a th:href="index"}>您已经登陆，点击返回</a>
+        <form th:action="@{'/logout'}">或者您也可以选择：</BR>
+            <input type="submit" value="注销">
+        </form>
+    </div>
+    <span th:text="${errorMsg}" class="errorMsg"></span>
+    <form method="post"  th:action="@{'/loginindex'}"  sec:authorize="!isAuthenticated()" >
+
+        username:<input type="text" name="username"/><br/>
+        password:<input type="password" name="password"/><br/>
+        图片验证码   <input type="text" name="imagecode">
+        <img src="/loginindex/image"><br/>
+
+        <input type="submit" value="提交"   />
+        <input type="reset" value="重置"/>
+        <a th:href="index"}>点击返回</a>
+    </form>
+
+
+
+    </body>
+
+</html>

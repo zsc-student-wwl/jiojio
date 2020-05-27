@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>校园二手书交易系统</title>
+</head>
+<body >
+<h1 style="text-align:center" sec:authorize="isAuthenticated()" >
+    欢迎您! ：<span sec:authentication="name"  style="color:#ff6700;font-weight:bold;">
+</span>
+    <h2>
+        <a   href="/user/ordersadd" style="text-align:right">查看我的订单</a>
+    </h2>
+</h1>
+<h2 sec:authorize="hasRole('ROLE_ADMIN')" >
+    <a   href="/admin/listuser">管理用户</a>&nbsp;&nbsp;&nbsp;&nbsp;
+</h2>
+
+<h2 sec:authorize="isAuthenticated()" >
+    <form th:action="@{'/logout'}" >
+        <input type="submit" style="text-align:right" value="注销">
+    </form>
+
+</h2>
+<h2 sec:authorize=!isAuthenticated()  style="text-align:center">
+    <a href="/loginindex">登陆</a>&nbsp;&nbsp;&nbsp;&nbsp;    <a href="/register">注册</a>
+</h2>
+<hr>
+<table align="center" width="80%" border="1">
+    <tr>
+        <th>图片</th>
+        <th>商品ID</th>
+        <th>商品名字</th>
+        <th>商品所有者</th>
+        <th>商品价格</th>
+        <th>商品数量</th>
+        <th>操作</th>
+
+    </tr>
+
+    <tr th:each="b:${bookss}">
+        <td><img th:src="${b.booksurl}"></td>
+        <td th:text="${b.bid}">商品ID</td>
+        <td th:text="${b.booksname}">商品名字</td>
+        <td th:text="${b.bookszuozhe}">商品所有者</td>
+        <td th:text="${b.booksprice}">商品价格</td>
+        <td th:text="${b.booksnum}">商品数量</td>
+        <td>
+            <div>
+                <a th:href="@{'/user/bookssadd?bid='+ ${b.bid}}">购买</a>
+            </div>
+        </td>
+
+    </tr>
+</table>
+
+
+<div class="modal-footer no-margin-top">
+    <div class="col-md-6">
+        <strong>当前第 [[${pageInfo.pageNum}]]页,共 [[${pageInfo.pages}]] 页.一共 [[${pageInfo.total}]] 条记录
+        </strong>
+    </div>
+    <ul class="pagination pull-right no-margin">
+        <li th:if="${pageInfo.hasPreviousPage}">
+            <a th:href="'index?pageNum=1'">首页</a>
+        </li>
+        <li class="prev" th:if="${pageInfo.hasPreviousPage}">
+            <a th:href="'index?pageNum='+${pageInfo.prePage}">
+                <i class="ace-icon fa fa-angle-double-left"></i>
+            </a>
+        </li>
+        <!--遍历条数-->
+        <li th:each="nav:${pageInfo.navigatepageNums}">
+            <a th:href="'index?pageNum='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+            <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
+        </li>
+        <li class="next" th:if="${pageInfo.hasNextPage}">
+            <a th:href="'index?pageNum='+${pageInfo.nextPage}">
+                <i class="ace-icon fa fa-angle-double-right"></i>
+            </a>
+        </li>
+        <li>
+            <a th:href="'index?pageNum='+${pageInfo.pages}">尾页</a>
+        </li>
+    </ul>
+    <div id="qrcode" th:each="b:${bookss}"></div>
+    <script src="../static/qrcode/qrcodejs-04f46c6/jquery.min.js"></script>
+    <script src="../static/qrcode/qrcodejs-04f46c6/qrcode.min.js"></script>
+
+
+    <script type="text/javascript">
+        new QRCode(document.getElementById("qrcode"), b.booksname);  // 设置要生成二维码的链接
+    </script>
+
+
+
+
+</body>
+</html>

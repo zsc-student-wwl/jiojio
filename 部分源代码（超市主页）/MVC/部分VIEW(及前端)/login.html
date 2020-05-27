@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <!-- Bootstrap css文件 -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
+    <!-- 站点 自定义 样式 -->
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- 页面 自定义 样式 -->
+    <style>
+        #form-login .form-group{min-height: 30px;}
+        #form-login button{margin-right: 30px;}
+
+    </style>
+</head>
+<body>
+<!-- jQuery文件 在bootstrap.min.js 前引入 -->
+<script src="/assets/jQuery/jquery-2.1.4.min.js"></script>
+<!-- bootstrap js文件 -->
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<!-- 站点 自定义 函数库 -->
+<script src="/js/site.js"></script>
+
+<!-- 页面 自定义 js -->
+<script>
+    $(function () {
+
+    });
+</script>
+
+<!-- 顶部导航栏 -->
+<header class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid ">
+        <div class="container">
+            <a href="/index" class="navbar-brand" ><strong style="color: whitesmoke">ZSC.Shop.com</strong></a>
+        </div>
+    </div>
+</header>
+
+<!-- 主体内容 -->
+<section class="container">
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-sm-8">
+            <img src="/images/logo.jpg" class="img-responsive img-circle"/>
+        </div>
+        <br/>
+        <br/>
+        <div class="col-sm-4">
+            <h2><span class="fa fa-user">用户登录</span></h2>
+            <form id="form-login" action="/login" method="post">
+                <div class="form-group">
+                    <label>用户名：</label>
+                    <input type="text" class="form-control" placeholder="输入用户名" name="username"/>
+                </div>
+                <div class="form-group">
+                    <label>密码：</label>
+                    <input type="password" class="form-control" placeholder="输入密码" name="password"/>
+                </div>
+                <span th:text="${msg}"></span>
+                <div class="form-group">
+                    <label class="col-sm-6 checkbox-inline">
+                        <input type="checkbox"/>记住我
+                    </label>
+                    <label class="col-sm-6">
+                        <a href="/register">点击注册</a>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-danger" onclick="resetForm(this)">重置</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- 底部注脚 -->
+<footer class="footer">
+    <p>Power @zsc J2EE平台开发与应用</p>
+</footer>
+</body>
+</html>

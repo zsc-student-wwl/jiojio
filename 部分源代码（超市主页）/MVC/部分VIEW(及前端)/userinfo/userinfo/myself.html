@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <!-- Bootstrap css文件 -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
+    <!-- 站点 自定义 样式 -->
+    <link rel="stylesheet" href="/css/site.css">
+
+    <!-- 页面 自定义 样式 -->
+    <style>
+
+        *{margin: 0;padding: 0;text-decoration: none;list-style-type: none;font-family: Times New Roman;}
+
+        img{border:none;}
+        a{border:none;text-decoration: none;color:#000;}
+        .border{border:1px solid red;}
+        .center{margin: 0 auto;}
+        .w{width: 1226px;margin: 0 auto;}
+        .fl{float: left;}
+        .fr{float: right;}
+        .clear{clear:both;}
+        .ml40{margin-left: 60px;}
+        /*个人中心*/
+        .grzxbj{width: 100%;height:auto;background: rgb(245,245,245);padding-bottom: 20px;padding-top: 20px;}
+        .grzxbj .selfinfo{width: 1226px;}
+        .grzxbj .selfinfo .lfnav{width: 234px;height: 500px;background: #fff;}
+        .grzxbj .selfinfo .lfnav .ddzx{width: 234px;height: 40px;line-height: 40px;font-size: 19px; margin:30px 20px 10px 40px;color:rgb(51,51,51);}
+        .grzxbj .selfinfo .lfnav .subddzx ul li{display: block;width: 194px;height: 40px;line-height: 40px;padding-left: 40px;}
+        .grzxbj .selfinfo .lfnav .subddzx ul li a{color:rgb(117,117,117);}
+        .grzxbj .selfinfo .lfnav .subddzx ul li a:hover{color:rgb(51,51,51);}
+        .grzxbj .selfinfo .rtcont{width: 978px;height: 500px;background: #fff;}
+        .grzxbj .selfinfo .rtcont .grzlbt{width:938px;height: 60px;line-height: 60px;font-size: 20px;color:rgb(117,117,117);}
+        .grzxbj .selfinfo .rtcont .subgrzl{height: 45px;line-height: 45px;width: 900px;background: rgb(253,253,253);border:1px solid #aaa;margin-top: 10px;margin-bottom: 10px;border-radius: 3px;}
+        .grzxbj .selfinfo .rtcont .subgrzl span:nth-of-type(1){display: inline-block;font-size: 15px;font-weight: bold;color:rgb(117,117,117);width: 70px;height: 45px;line-height: 45px;padding-left: 20px;}
+        .grzxbj .selfinfo .rtcont .subgrzl span:nth-of-type(2){display: inline-block;font-size: 15px;color:rgb(117,117,117);width: 480px;height: 45px;line-height: 45px;padding-left: 120px;
+        }
+        .grzxbj .selfinfo .rtcont .subgrzl span:nth-of-type(3){display: inline-block;font-size: 15px;width: 160px;height: 45px;line-height: 45px;text-align: right;}
+        .grzxbj .selfinfo .rtcont .subgrzl span a{color:teal; }
+        .grzxbj .selfinfo .rtcont .subgrzl span a:hover{color:#ff6700; }
+
+    </style>
+</head>
+<body>
+<!-- jQuery文件 在bootstrap.min.js 前引入 -->
+<script src="/assets/jQuery/jquery-2.1.4.min.js"></script>
+<!-- bootstrap js文件 -->
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<!-- 站点 自定义 函数库 -->
+<script src="/js/site.js"></script>
+
+<!-- 顶部导航栏 -->
+<header class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="/index" class="navbar-brand"><strong style="color: white">ZSC.Shop.com</strong></a>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/userinfo/orderDetails">首页</a></li>
+        </ul>
+        <div class="navbar-right">
+            <p class="navbar-text">您好&nbsp;<span th:text="${uName}" class="uName" ></span></p>
+            <ul class="nav navbar-nav">
+                <li><a  href="/userinfo/myself">个人中心</a></li>
+                <li id="log"><a href="/login">登录</a></li>
+                <li><a href="/logout">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<!--个人信息-->
+<br/>
+<br/>
+<br/>
+<div class="grzxbj">
+    <div class="selfinfo center">
+        <div class="lfnav fl">
+            <div class="ddzx">订单中心</div>
+            <div class="subddzx">
+                <ul>
+                    <li><a href="/userinfo/orderDetails" >我的订单</a></li>
+                </ul>
+            </div>
+            <div class="ddzx">个人中心</div>
+            <div class="subddzx">
+                <ul>
+                    <li><a href="/userinfo/myself" style="color:#ff6700;font-weight:bold;">我的个人中心</a></li>
+                    <li><a th:href="@{'/userinfo/modifyMyself?id='+${user.id}}">个人信息修改</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="rtcont fr" >
+            <div class="grzlbt ml40">我的资料</div>
+            <div class="subgrzl ml40"><span>用户名</span><span th:text="${user.username}">啦啦维吉尔</span></div>
+            <div class="subgrzl ml40"><span>密码</span><span th:text="${user.password}">15669097417</span><</div>
+            <div class="subgrzl ml40"><span>姓名</span><span th:text="${user.name}">************</span></div>
+            <div class="subgrzl ml40"><span>性别</span><span th:text="${user.sex}">一支穿云箭，千军万马来相见！</span></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<!-- 底部注脚 -->
+<footer class="footer">
+    <p>Power @zsc J2EE平台开发与应用</p>
+</footer>
+</body>
+</html>

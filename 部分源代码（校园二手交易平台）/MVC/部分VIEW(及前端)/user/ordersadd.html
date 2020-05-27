@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+</head>
+<body>
+<h1 style="text-align:center">
+    <ul>
+        <li><a href="/user/ordersadd" style="color:#ff6700;font-weight:bold;"  >我的订单</a></li>
+        <li><a href="/user/editmyuser" style="color:#ff6700;font-weight:bold;">我的个人中心</a></li>
+        <li><a href="/index" style="color:#ff6700;font-weight:bold;">去购物</a></li>
+        <li><form th:action="@{'/logout'}">
+            <input type="submit" value="退出">
+        </form></li>
+    </ul>
+</h1>
+<hr>
+<div class="ddxq">
+    <table class="table table-striped table-bordered table-hover  table-condensed">
+        <tr class="center">
+            <th>订单编号</th>&nbsp;&nbsp;
+            <th>用户名称</th>&nbsp;&nbsp;
+            <th>购买的商品</th>&nbsp;&nbsp;
+            <th>数量</th>&nbsp;&nbsp;
+            <th>总金额</th>&nbsp;&nbsp;
+            <th>是否支付</th>
+            <th>操作</th>
+        </tr>
+
+        <tr  th:each="o:${orders}" class="center">
+            <td style="height:50px" th:text="${o.oid}"></td>&nbsp;&nbsp;
+            <td style="height:50px"th:text="${o.users}"></td>&nbsp;&nbsp;&nbsp;&nbsp;
+            <td style="height:50px"th:text="${o.bookss}"></td>&nbsp;&nbsp;
+            <td style="height:50px"th:text="${o.onum}"></td>&nbsp;&nbsp;
+            <td style="height:50px" th:text="${o.booksprice*o.onum}">2019/06/12</td>&nbsp;&nbsp;
+            <td style="height:50px" >
+                <a   style="color:red"  th:href="@{'/user/ordersget?oid='+${o.oid}}"  th:if="${o.pay}==1">去支付</a>
+                <span th:if="${o.pay}==2" style="color: blue">已支付</span>
+            </td>
+
+            <td  style="height:50px" >
+
+                <span th:if="${o.pay}==2" style="color: blue">用户已经付款，不可删除</span>
+                <a th:href="@{'/user/deleteorders?oid='+${o.oid}}"   th:if="${o.pay}==1" onclick="deleteordersonclick()">删除</a>
+            </td>
+
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
